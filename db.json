@@ -1,0 +1,95 @@
+{
+  "teachers": [
+    {
+      "id": "3d32",
+      "name": "Sofia",
+      "subjects": "3",
+      "country": "Sxddv",
+      "city": "Sfff",
+      "email": "chepursofia27@gmail.com",
+      "phone": "0365985568",
+      "birthday": "2500-02-10",
+      "gender": "female",
+      "color": "#000000",
+      "comments": "fdxgdxf"
+    },
+    {
+      "id": "439f",
+      "name": "Qsdjsd",
+      "subjects": "3",
+      "country": "Qiewie",
+      "city": "Ldkfodf",
+      "email": "dfsfsdsd@gmail.com",
+      "phone": "026865484654",
+      "birthday": "2005-01-25",
+      "gender": "male",
+      "color": "#000000",
+      "comments": "Sdsdsds"
+    },
+    {
+      "id": "db91",
+      "name": "Cjasz",
+      "subjects": "6",
+      "country": "Україна",
+      "city": "Київ",
+      "email": "aaaaaaa@ukr.net",
+      "phone": "0686369712",
+      "birthday": "2015-01-20",
+      "gender": "female",
+      "color": "#f00000",
+      "comments": "Іаава вававяа"
+    },
+    {
+      "id": "bb47",
+      "name": "Lkdks",
+      "subjects": "1",
+      "country": "Sxddv",
+      "city": "Dssd",
+      "email": "chepursofia@knu.ua",
+      "phone": "+380686369712",
+      "birthday": "2003-01-25",
+      "gender": "male",
+      "color": "#008bc7",
+      "comments": "Вавявава"
+    },
+    {
+      "id": "e7fe",
+      "name": "Lllll",
+      "subjects": "1",
+      "country": "Lllll",
+      "city": "Lkdsff",
+      "email": "chepursofia@gmail.com",
+      "phone": "0686369712",
+      "birthday": "2004-03-23",
+      "gender": "male",
+      "color": "#a2ff57",
+      "comments": "Fjsfj djsdlk"
+    },
+    {
+      "id": "2575",
+      "name": "Vfgdfd",
+      "subjects": "8",
+      "country": "Fdfzff",
+      "city": "Fdsf",
+      "email": "aaaaaaa@ukr.net",
+      "phone": "1234567894",
+      "birthday": "2005-02-20",
+      "gender": "other",
+      "color": "#1958d7",
+      "comments": "Fzxfdfjz jfgdfnakn"
+    },
+    {
+      "id": "8cad",
+      "name": "Ffdzfzsfdf",
+      "subjects": "6",
+      "country": "Sxddv",
+      "city": "Sfff",
+      "email": "chepursofia@knu.ua",
+      "phone": "0686369712",
+      "birthday": "2005-01-25",
+      "gender": "female",
+      "color": "#c70a0a",
+      "comments": "Dfdxfd"
+    }
+  ]
+}

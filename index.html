@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teachers</title>
+  <script src="index.js"></script>
+  <script src="index2.js"></script>
+  <script src="lab_5.js"></script>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+</head>
+<body>
+
+<header>
+  <h1> Teachinder </h1>
+  <div class="container">
+    <label>
+      <input id="search" class="search" type="text" placeholder="Name, note or age to search">
+    </label>
+    <button class="button1" ><strong>Search</strong></button>
+
+
+    <div id="user-list" class="user-list" >
+
+    </div>
+  </div>
+
+
+</header>
+
+<main>
+  <div class="container">
+    <nav>
+      <a href="#" class="nav"><strong>Teachers</strong></a>
+      <a href="#" class="nav"><strong>Statistics</strong></a>
+      <a href="#" class="nav"><strong>Favorites</strong></a>
+      <a href="#" class="nav"><strong>About</strong></a>
+    </nav>
+
+    <button class="button2" id="showFormButton"><strong>Add teacher</strong></button>
+  </div>
+  <div id="myModal" class="modal" >
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h3>Add teachers</h3>
+      </div>
+
+      <form class="modal-body">
+        <div class="name-form">
+          <label class="name-form">Name
+            <input  type="text" name="name" required pattern="^[A-Za-z\s]+$"  placeholder="Enter name"><br>
+          </label>
+        </div>
+
+        <div class="subjects">
+          <label > Speciality
+            <select name="subjects" >
+              <option value="1">Mathematics</option>
+              <option value="2">Physics</option>
+              <option value="3">Chemistry</option>
+              <option value="4">Biology</option>
+              <option value="5">Computer Science</option>
+              <option value="6">Literature</option>
+              <option value="7">History</option>
+              <option value="8">Geography</option>
+              <option value="9">English</option>
+              <option value="10">Art</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="country-city">
+          <div class="country-form" id="country-choice2">
+            <label class="name-form" >Country
+              <input  type="text" name="country"   placeholder="Enter country"><br>
+            </label>
+          </div>
+
+          <div class="city-form">
+            <label >City
+              <input type="text" name="city" id="city-input" >
+            </label>
+          </div>
+        </div>
+
+
+        <div class="email-phone">
+          <div class="email">
+            <label> Email
+              <input type="email" name="email" >
+            </label>
+          </div>
+
+          <div class="phone">
+            <label> Phone
+              <input type="tel" name="phone">
+            </label>
+          </div>
+        </div>
+
+
+        <div class="birthday">
+          <label > Date of Birth <br>
+            <input type="date" name="birthday"  >
+          </label>
+        </div>
+
+
+        <div class="gender">
+          <label> Sex </label>
+          <label><input type="radio" name="gender" value="male">Male </label>
+          <label> <input  type="radio" name="gender" value="female">Female </label>
+          <label> <input type="radio" name="gender" value="other">Other </label> <br><br>
+        </div>
+
+        <div class="b-color">
+          <label> Background color
+            <input type="color" name="color"></label>
+        </div>
+
+        <div class="note">
+          <label> Notes (optional)
+            <textarea id="comments" name="comments" rows="2" cols="25"></textarea><br>
+          </label>
+        </div>
+
+        <button id="submit" type="submit" class="button-submit">Add</button><br><br>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="line"></div>
+
+  <section>
+    <h2>Top Teachers</h2>
+
+    <div class="select-wrapper">
+    <label for="age"> Age
+      <select name="age" id="age">
+        <option value="select all" selected>Select all</option>
+        <option value="18-31" >18-31</option>
+        <option value="32-49">32-49</option>
+        <option value="50-69">50-69</option>
+      </select>
+    </label>
+
+    <span class="g"></span>
+
+    <label for="region"> Region
+      <select name="region" id="region">
+        <option value="select all" selected>Select all</option>
+        <option value="us">US</option>
+        <option value="europe">Europe</option>
+        <option value="canada">Canada</option>
+        <option value="australia">Australia</option>
+        <option value="china">China</option>
+      </select>
+    </label>
+
+    <span class="g"></span>
+
+    <label for="sex"> Sex
+      <select name="sex" id="sex">
+        <option value="select all" selected>Select all</option>
+        <option value="male" >Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+
+    <div id="filtered-user-list"></div>
+
+
+    <span class="g"></span>
+    <label for="only-with-photo">
+      <input type="checkbox" id="only-with-photo"> Only with photo
+    </label>
+
+    <span class="g"></span>
+    <label for="only-favorites">
+      <input type="checkbox" id="only-favorites">Only favorites
+    </label>
+</div>
+    <div class="wrapper" id="users-container"></div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="prev-btn" disabled>Previous</button>
+      <span id="page-info">Page 1</span>
+      <button id="next-btn" disabled>Next</button>
+    </div>
+
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <div class="popup-header">
+          <span class="close-popup" onclick="closePopup()">&times;</span>
+          <h2>Teachers info </h2>
+        </div>
+        <span id="favorite-star" class="star" onclick="toggleFavorite()">&starf;</span>
+        <div class="container">
+          <img id="popup-photo" src="photo/iconka.png" alt="фото користувача" class="popup-photo">
+          <div class="popup-body">
+            <h3 id="popup-name"></h3>
+            <span id="popup-position"></span><br>
+            <span id="popup-country"></span><br>
+            <span id="popup-phone"></span><br>
+            <span id="popup-email"></span><br>
+            <span id="popup-gender"></span><br>
+            <span id="popup-age"></span><br>
+            <span id="popup-dob"></span>
+             <span id="popup-days-to-birthday"></span>
+          </div>
+        </div>
+        <div class="comment">
+          <p><strong>Comment:</strong> <span id="popup-comment"></span></p>
+        </div>
+        <div class="popup-footer">
+
+          <div id="leaflet-map" style="height: 100px; display: none;"></div>
+          <a id="popup-map" href="#" target="_blank">View on map</a>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <section>
+    <div class="line"></div>
+    <h2>Statistics</h2>
+    <table id="statistics-table">
+      <thead>
+      <tr>
+        <th >Name</th>
+        <th>Speciality</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Nationality</th>
+      </tr>
+      </thead>
+      <tbody>
+    <!-- тут відображаються рядки таблиці-->
+      </tbody>
+    </table>
+    <label for="stats-category">Показати статистику за:</label>
+    <select id="stats-category">
+      <option value="gender">Стать</option>
+      <option value="age">Вік</option>
+      <option value="country">Країна</option>
+    </select>
+    <div style="position: relative; height:550px; width:750px; margin: 0 auto;">
+      <canvas id="statisticsChart"  ></canvas></div>
+    <div class="pagination" id="pagination"></div>
+  </section>
+  <section>
+    <div class="line"></div>
+    <h2>Favorites</h2>
+    <div class="card">
+      <button class="preview left-btn" type="button">&lt;</button>
+
+      <div class="people-container">
+        <div class="people">
+          <figure><img src="photo/img.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+        <div class="people">
+          <figure><img src="photo/img_2.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+        <div class="people">
+          <figure><img src="photo/img_3.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+        <div class="people">
+          <figure><img src="photo/img_4.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+        <div class="people">
+          <figure><img src="photo/img_5.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+        <div class="people">
+          <figure><img src="photo/iconka.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+        <div class="people">
+          <figure><img src="photo/iconka.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+        <div class="people">
+          <figure><img src="photo/iconka.png" alt="фото користувача" ></figure>
+          <div class="name"><span>Ihor Tkachuk</span></div>
+          <div class="position"><span>Chemistry</span></div>
+          <div class="country"><span>Ukraine</span></div>
+        </div>
+      </div>
+      <button class="preview right-btn" type="button">&gt;</button>
+    </div>
+  </section>
+
+  <div class="line"></div>
+  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aeneas common angular get dolor.
+    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+    Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+    Nulla consequat massa quis enim.
+  </p>
+  <p>
+    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+    In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+    Nullam dictum felis eu pede mollis pretium.
+  </p>
+  <p>Integer tincidunt. Cras dapibus.Vivamus elementum semper nisi.</p>
+
+</main>
+<footer>
+  <div class="container">
+    <nav>
+      <a href="#" class="nav">Teachers</a>
+      <a href="#" class="nav">Statistics</a>
+      <a href="#" class="nav">Favorites</a>
+      <a href="#" class="nav">About</a>
+    </nav>
+    <button class="button3" id="showFormButton2" >Add teacher</button>
+  </div>
+</footer>
+</body>
+</html>
